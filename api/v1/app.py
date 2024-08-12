@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Module app.py
-"""
+""" Module app.py """
 
 from flask import Flask, jsonify
 from models import storage
