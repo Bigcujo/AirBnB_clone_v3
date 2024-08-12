@@ -1,13 +1,20 @@
 #!/usr/bin/python3
-"""roor file for the api"""
+"""root file for the RESTFUL API"""
 from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 import os
 import MySQLdb
+from flask_cors import CORS
 
-app = Flask(__name__)
-app.register_blueprint(app_views)
+def create_app():
+    app = Flask(__name__)
+    app.url_map.strict_slashes = False
+    app.register_blueprint(app_views)
+    cors = CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
+    return app
+
+app = create_app()
 
 def create_database():
     """Create the MySQL database if it doesn't exist."""
@@ -45,6 +52,8 @@ def not_found(error):
 
 
 if __name__ == "__main__":
+    create_database()
     host = os.getenv("HBNB_API_HOST", "0.0.0.0")
     port = int(os.getenv("HBNB_API_PORT", "5000"))
     app.run(host=host, port=port, threaded=True, debug=True)
+
