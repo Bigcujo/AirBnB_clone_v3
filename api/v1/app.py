@@ -8,6 +8,7 @@ import MySQLdb
 from flask_cors import CORS
 
 def create_app():
+    """creats the api method"""
     app = Flask(__name__)
     app.url_map.strict_slashes = False
     app.register_blueprint(app_views)
