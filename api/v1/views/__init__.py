@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Declaring the blue print module"""
+
 from flask import Blueprint
 from models.state import State
 from models.user import User
